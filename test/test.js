@@ -131,8 +131,6 @@ describe( 'compute-skewness', function tests() {
 	});
 
 	it( 'should compute the distribution skewness when provided a number', function test() {
-		assert.closeTo( skewness( -1 ), NaN, 1e-5 );
-		assert.closeTo( skewness( 0  ), NaN, 1e-5 );
 		assert.closeTo( skewness( 0.5  ), 2, 1e-5 );
 		assert.closeTo( skewness( 1  ), 2, 1e-5 );
 	});

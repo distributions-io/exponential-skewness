@@ -2,12 +2,12 @@ Skewness
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> [exponential](https://en.wikipedia.org/wiki/exponential_distribution) distribution [skewness](https://en.wikipedia.org/wiki/skewness).
+> [Exponential](https://en.wikipedia.org/wiki/exponential_distribution) distribution [skewness](https://en.wikipedia.org/wiki/skewness).
 
 The [skewness](https://en.wikipedia.org/wiki/skewness) for a [exponential](https://en.wikipedia.org/wiki/exponential_distribution) random variable is
 
-<div class="equation" align="center" data-raw-text="\operatorname{}\left[ X \right] = " data-equation="eq:skewness">
-	<img src="" alt="skewness for a exponential distribution.">
+<div class="equation" align="center" data-raw-text="\operatorname{skew}\left( X \right) = 2" data-equation="eq:skewness">
+	<img src="https://cdn.rawgit.com/distributions-io/exponential-skewness/ede88b86212a7e709120b855db31c3d58dea9e49/docs/img/eqn.svg" alt="Skewness for a exponential distribution.">
 	<br>
 </div>
 
@@ -252,7 +252,7 @@ var lambda,
 // Plain arrays...
 lambda = new Array( 10 );
 for ( i = 0; i < lambda.length; i++ ) {
-	lambda[ i ] = i;
+	lambda[ i ] = i + 1;
 }
 out = skewness( lambda );
 
@@ -283,7 +283,7 @@ out = skewness( lambda, {
 // Typed arrays...
 lambda = new Float64Array( 10 );
 for ( i = 0; i < lambda.length; i++ ) {
-	lambda[ i ] = i;
+	lambda[ i ] = i + 1;
 }
 out = skewness( lambda );
 

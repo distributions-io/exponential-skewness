@@ -28,14 +28,13 @@ describe( 'number skewness', function tests() {
 	});
 
 	it( 'should compute the distribution skewness', function test() {
-		assert.closeTo( skewness( -1 ), NaN, 1e-5 );
-		assert.closeTo( skewness( 0  ), NaN, 1e-5 );
 		assert.closeTo( skewness( 0.5  ), 2, 1e-5 );
 		assert.closeTo( skewness( 1  ), 2, 1e-5 );
 	});
 
 	it( 'should return `NaN` for invalid values of parameter lambda', function test() {
 		assert.isTrue( isnan( skewness( -1 ) ) );
+		assert.isTrue( isnan( skewness( 0 ) ) );
 	});
 
 });
