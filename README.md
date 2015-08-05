@@ -4,7 +4,7 @@ Skewness
 
 > [Exponential](https://en.wikipedia.org/wiki/exponential_distribution) distribution [skewness](https://en.wikipedia.org/wiki/skewness).
 
-The [skewness](https://en.wikipedia.org/wiki/skewness) for a [exponential](https://en.wikipedia.org/wiki/exponential_distribution) random variable is
+The [skewness](https://en.wikipedia.org/wiki/skewness) for an [exponential](https://en.wikipedia.org/wiki/exponential_distribution) random variable is
 
 <div class="equation" align="center" data-raw-text="\operatorname{skew}\left( X \right) = 2" data-equation="eq:skewness">
 	<img src="https://cdn.rawgit.com/distributions-io/exponential-skewness/ede88b86212a7e709120b855db31c3d58dea9e49/docs/img/eqn.svg" alt="Skewness for a exponential distribution.">
@@ -31,7 +31,7 @@ var skewness = require( 'distributions-exponential-skewness' );
 
 #### skewness( lambda[, opts] )
 
-Computes the [skewness](https://en.wikipedia.org/wiki/skewness) for a [exponential](https://en.wikipedia.org/wiki/exponential_distribution) distribution with parameter `lambda`. `lambda` may be either a [`number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), an [`array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), a [`typed array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays), or a [`matrix`](https://github.com/dstructs/matrix).
+Computes the [skewness](https://en.wikipedia.org/wiki/skewness) for an [exponential](https://en.wikipedia.org/wiki/exponential_distribution) distribution with parameter `lambda`. `lambda` may be either a [`number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number), an [`array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), a [`typed array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays), or a [`matrix`](https://github.com/dstructs/matrix).
 
 ``` javascript
 var matrix = require( 'dstructs-matrix' ),
@@ -41,27 +41,27 @@ var matrix = require( 'dstructs-matrix' ),
 	i;
 
 out = skewness( -1 );
-// returns ~NaN
+// returns NaN
 
 lambda = [ -1, 0, 0.5, 1 ];
 out = skewness( lambda );
 
-// returns [ ~NaN, ~NaN, ~2.000, ~2.000 ]
+// returns [ NaN, NaN, 2.000, 2.000 ]
 
 lambda = new Float32Array( lambda );
 out = skewness( lambda );
-// returns Float64Array( [~NaN,~NaN,~2.000,~2.000] )
+// returns Float64Array( [NaN,NaN,2.000,2.000] )
 
 lambda =  matrix( [ -1, 0, 0.5, 1 ], [2,2] );
 /*
-	[ -1 0,
+	[ -1  0
 	  0.5 1 ]
 */
 
 out = skewness( lambda );
 /*
-	[ ~NaN ~NaN,
-	  ~2.000 ~2.000 ]
+	[ NaN   NaN
+	  2.000 2.000 ]
 */
 ```
 
@@ -90,7 +90,7 @@ function getValue( d, i ) {
 var out = skewness( lambda, {
 	'accessor': getValue
 });
-// returns [ ~NaN, ~NaN, ~2.000, ~2.000 ]
+// returns [ NaN, NaN, 2.000, 2.000 ]
 ```
 
 To [deepset](https://github.com/kgryte/utils-deep-set) an object `array`, provide a key path and, optionally, a key path separator.
@@ -106,10 +106,10 @@ var lambda = [
 var out = skewness( lambda, 'x|1', '|' );
 /*
 	[
-		{'x':[9,~NaN]},
-		{'x':[9,~NaN]},
-		{'x':[9,~2.000]},
-		{'x':[9,~2.000]},
+		{'x':[9,NaN]},
+		{'x':[9,NaN]},
+		{'x':[9,2.000]},
+		{'x':[9,2.000]},
 	]
 */
 
@@ -124,16 +124,17 @@ var lambda, out;
 
 lambda = new Float64Array( [ -1,0,0.5,1 ] );
 
+// Beware: `NaN` is cast to `0` for integer-typed arrays!
 out = skewness( lambda, {
 	'dtype': 'int32'
 });
-// returns Int32Array( [ NaN,NaN,2,2 ] )
+// returns Int32Array( [ 0,0,2,2 ] )
 
 // Works for plain arrays, as well...
 out = skewness( [-1,0,0.5,1], {
 	'dtype': 'int32'
 });
-// returns Int32Array( [ NaN,NaN,2,2 ] )
+// returns Int32Array( [ 0,0,2,2 ] )
 ```
 
 By default, the function returns a new data structure. To mutate the input data structure (e.g., when input values can be discarded or when optimizing memory usage), set the `copy` option to `false`.
@@ -150,7 +151,7 @@ lambda = [ -1, 0, 0.5, 1 ];
 out = skewness( lambda, {
 	'copy': false
 });
-// returns [ ~NaN, ~NaN, ~2.000, ~2.000 ]
+// returns [ NaN, NaN, 2.000, 2.000 ]
 
 bool = ( data === out );
 // returns true
@@ -165,8 +166,8 @@ out = skewness( mat, {
 	'copy': false
 });
 /*
-	[ ~NaN ~NaN,
-	  ~2.000 ~2.000 ]
+	[ NaN   NaN
+	  2.000 2.000 ]
 */
 
 bool = ( mat === out );
